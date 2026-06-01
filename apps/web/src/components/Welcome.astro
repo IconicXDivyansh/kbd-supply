@@ -1,0 +1,118 @@
+---
+import Handshake from "./Icons/Handshake.astro";
+const letters = ["kbd"];
+---
+<div class="-space-y-3 select-none py-6 text-center my-10">
+	<h1 class="font-kalam text-8xl text-orange-400/80">
+		{letters.map((letter) => (
+			<span class="font-kalam">{letter}</span>
+		))}<span class="font-serif">.</span>
+	</h1>
+	<h2 class="mt-2 font-sans text-5xl font-semibold text-neutral-400/70">supply</h2>
+</div>
+
+<div class="text-center radial-container">
+
+	<div class="text-center centered-content">
+		<h2 class="text-xs">Where</h2>
+		<h3 class="flex items-center justify-center gap-2 pr-4 text-center font-sans text-neutral-600">
+			Keyboard <Handshake class="size-5 text-black" /> Web
+		</h3>
+	</div>
+
+	<div class="card-ring">
+    <div class="card card-1">Card 1</div>
+    <div class="card card-2">Card 2</div>
+    <div class="card card-3">Card 3</div>
+    <div class="card card-4">Card 4</div>
+    <div class="card card-5">Card 5</div>
+    <div class="card card-6">Card 6</div>
+	<div class="card card-7">Card 7</div>
+	<div class="card card-8">Card 8</div>
+
+
+  </div>
+</div>
+
+
+<style>
+	.radial-container{
+		position: relative;
+		padding-block: 6rem;
+		width: 100vw;
+		height: 60vh;
+		overflow:hidden;
+		display: flex;
+		align-content: center;
+		justify-content: center;
+		background: #f4f4f4;
+	}
+
+	.centered-content{
+		position:absolute;
+		max-width:450px;
+		top: calc(50% + 80px);
+		left: calc(50% - 80px);
+		text-align:center;
+		z-index: 10;
+	}
+	.card-ring{
+		position:absolute;
+		width: 800px;
+		height:800px;
+		border-radius: 50%;
+		border:2px dashed #ccc;
+		animation: spinRing 40s linear infinite;
+	}
+
+	
+
+	.card{
+		position: absolute;
+		top: calc(50% - 75px);
+		left: calc(50% - 100px);
+		width:220px;
+		height:150px;
+		background: #222;
+		color: white;
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		user-select: none;
+	}
+
+	.card-1{
+		transform: rotate(-90deg) translateY(-400px);
+	}
+	.card-2{
+		transform: rotate(-45deg) translateY(-400px);
+	}
+	.card-3{
+		transform: rotate(0deg) translateY(-400px);
+	}
+	.card-4{
+		transform: rotate(45deg) translateY(-400px);
+	}
+	.card-5{
+		transform: rotate(90deg) translateY(-400px);
+	}
+	.card-6{
+		transform: rotate(135deg) translateY(-400px);
+	}
+	.card-7{
+		transform: rotate(180deg) translateY(-400px);
+	}
+	.card-8{
+		transform: rotate(225deg) translateY(-400px);
+	}
+
+	@keyframes spinRing{
+		0% {
+			transform: rotate(0deg);
+		}
+		100%{
+			transform: rotate(360deg);
+		}
+	}
+</style>

@@ -1,0 +1,151 @@
+---
+const cards = [
+	{ title: '3D motion', label: 'Interaction', tone: 'from-zinc-900 to-zinc-700', accent: 'from-amber-300 to-orange-500' },
+	{ title: 'Pixel art', label: 'Visuals', tone: 'from-slate-900 to-slate-700', accent: 'from-sky-300 to-cyan-500' },
+	{ title: 'Sound design', label: 'Audio', tone: 'from-stone-900 to-stone-700', accent: 'from-rose-300 to-pink-500' },
+	{ title: 'Microcopy', label: 'Content', tone: 'from-neutral-900 to-neutral-700', accent: 'from-emerald-300 to-lime-500' },
+	{ title: 'Transitions', label: 'Motion', tone: 'from-zinc-900 to-zinc-700', accent: 'from-violet-300 to-fuchsia-500' },
+	{ title: 'Type systems', label: 'Typography', tone: 'from-slate-900 to-slate-700', accent: 'from-orange-300 to-red-500' },
+	{ title: 'Layouts', label: 'Composition', tone: 'from-stone-900 to-stone-700', accent: 'from-teal-300 to-cyan-500' },
+	{ title: 'Toolkit', label: 'Build', tone: 'from-neutral-900 to-neutral-700', accent: 'from-yellow-200 to-amber-500' },
+];
+---
+
+<section class="relative min-h-[calc(100vh-2rem)] overflow-hidden px-6 py-10 text-zinc-900">
+	<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.05),transparent_42%)]"></div>
+
+	<div class="relative mx-auto flex min-h-[calc(100vh-2rem)] max-w-6xl flex-col items-center justify-center gap-10">
+		<div class="max-w-xl text-center">
+			<p class="mb-3 text-xs font-semibold uppercase tracking-[0.35em] text-zinc-500">
+				Rotating card wheel
+			</p>
+			<h1 class="font-kalam text-5xl text-zinc-900 sm:text-6xl">
+				A circular motion layout
+			</h1>
+			<p class="mt-4 text-sm leading-6 text-zinc-600 sm:text-base">
+				Each card sits on a ring, the ring spins, and each card counter-rotates so the content
+				stays readable.
+			</p>
+		</div>
+
+		<div class="wheel-wrap relative grid place-items-center">
+			<div class="wheel">
+				{cards.map((card, index) => (
+					<article
+						class:list={[
+							'card absolute left-1/2 top-1/2 h-40 w-28 -translate-x-1/2 -translate-y-1/2 rounded-[1.35rem] border border-white/10 bg-linear-to-br p-3 text-white shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:h-44 sm:w-32',
+							card.tone,
+						]}
+						style={`--index:${index}; --count:${cards.length}; --accent:${card.accent};`}
+					>
+							<div class="flex h-full flex-col justify-between rounded-2xl bg-black/25 p-3 ring-1 ring-white/10">
+							<div class="flex items-start justify-between gap-2">
+								<span class="text-[10px] font-medium uppercase tracking-[0.3em] text-white/65">
+									{card.label}
+								</span>
+								<span class="size-3 rounded-full bg-(--accent) shadow-[0_0_18px_var(--accent)]"></span>
+							</div>
+
+							<div class="space-y-1">
+								<div class="h-1.5 w-10 rounded-full bg-white/15"></div>
+								<h2 class="text-lg font-semibold leading-none tracking-tight sm:text-xl">{card.title}</h2>
+							</div>
+
+							<div class="flex items-end justify-between text-[10px] uppercase tracking-[0.25em] text-white/55">
+								<span>Preview</span>
+								<span>{index + 1}</span>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+
+			<div class="center-card relative z-10 grid h-36 w-56 place-items-center rounded-[1.75rem] border border-white/70 bg-white/85 p-5 text-center shadow-[0_20px_60px_rgba(0,0,0,0.12)] backdrop-blur-md sm:h-40 sm:w-64">
+				<div>
+					<p class="text-[10px] font-semibold uppercase tracking-[0.45em] text-zinc-500">
+						Play / Reel
+					</p>
+					<p class="mt-3 text-sm leading-6 text-zinc-700">
+						Place your cards around a wheel, then animate the container with CSS.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<style>
+	.wheel-wrap {
+		width: min(92vw, 860px);
+		height: min(92vw, 860px);
+		max-width: 860px;
+		max-height: 860px;
+	}
+
+	.wheel {
+		position: absolute;
+		inset: 0;
+		animation: spin 28s linear infinite;
+	}
+
+	.card {
+		transform:
+			translate(-50%, -50%)
+			rotate(calc(var(--index) * 360deg / var(--count)))
+			translateY(-325px)
+			rotate(calc(var(--index) * -360deg / var(--count)));
+		transform-origin: center;
+	}
+
+	.card:hover {
+		z-index: 20;
+		filter: saturate(1.08);
+	}
+
+	.center-card {
+		animation: float 6s ease-in-out infinite;
+	}
+
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0px);
+		}
+		50% {
+			transform: translateY(-8px);
+		}
+	}
+
+	@media (max-width: 640px) {
+		.wheel-wrap {
+			height: 680px;
+			width: 680px;
+		}
+
+		.card {
+			translate: 0 0;
+			transform:
+				translate(-50%, -50%)
+				rotate(calc(var(--index) * 360deg / var(--count)))
+				translateY(-250px)
+				rotate(calc(var(--index) * -360deg / var(--count)));
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.wheel,
+		.center-card {
+			animation: none;
+		}
+	}
+</style>
